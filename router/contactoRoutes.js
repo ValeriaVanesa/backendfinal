@@ -7,8 +7,6 @@ const{
     nuevoContacto,
     actualizarContacto,
     eliminarContacto
-    
-
 }= require('../controllers/contactoControllers');
 
 router.get('/',contacto);

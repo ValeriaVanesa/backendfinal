@@ -14,5 +14,5 @@ router.post('/',nuevaCompra);
 router.put( '/:id', actualizarCompra);
 router.delete( '/:id', eliminarCompra);
 
-module.exports =router;
+module.exports = router;
  

@@ -4,20 +4,20 @@ const dotenv = require("dotenv");
 dotenv.config();
 const contactos = require('../models/contactoModels');
 const mongoose = require("mongoose");
-const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
+const MONGO_URL_ATLAS = process.env.MONGO_URL_ATLAS;
+const path = require('path');
 
 
 
 function contacto (req,res){
-    res.send ('<h1> Comentarios de los usuarios');
+    res.sendFile(path.resolve('public/index5.html'));
 }
 
 
 //crear contacto
-
+//FALTA HACER
 const nuevoContacto = async(req,res)=>{
     
-
     const { email, nombre, telefono, comentario  }  = req.body;
     console.log(`los datos recibidos son : email: ${email} , nombre: ${nombre}, telefono: ${telefono} y comentario: ${comentario}`);
 
@@ -26,10 +26,8 @@ const nuevoContacto = async(req,res)=>{
         nombre: nombre,
         telefono:telefono,
         comentario:comentario
-        
+    }
     
-      }
-
     try{
         let datosContacto = await contactos.findOne({email,nombre,telefono,comentario})
         if(datosContacto){
@@ -39,36 +37,22 @@ const nuevoContacto = async(req,res)=>{
         }
         datosContacto = new contactos(data);
         console.log(`${datosContacto}`);
-        
-        
         await datosContacto.save();
-        }catch(error){
-            return res.send('No se puso enviar tu mensaje');
-        }
+    }catch(error){
+        return res.send('No se pudo enviar tu mensaje');
+    }
         
+    res.json({
+        email,
+        nombre,
+        telefono,
+        comentario
+    })
+}
         
-        
-        
-        
-        res.json({
-            email,
-            nombre,
-            telefono,
-            comentario
-            
-            
-        })
-        
-        
-        }
-        
-        
-
-
 
 //actualizar--------------------------------------------------------------------------
-
-
+//FALTA HACER
 const actualizarContacto = async(id)=>{
     const usuarios= await contactos.updateOne({_id:id},
         {
@@ -88,24 +72,17 @@ actualizarContacto('6538a5a3ad6e395ef7f8b500');
 
 
 //eliminar----------------------------------------------------------------------------
-
+//FALTA HACER
 const eliminarContacto = async(id)=>{
     const usuarios = await contactos.deleteOne({_id:id})
     console.log(usuarios)
     }
     eliminarContacto('6538a5a3ad6e395ef7f8b500');
-    
-
-
-
-
 
 module.exports={
     contacto,
     nuevoContacto,
     actualizarContacto,
     eliminarContacto
-   
-   
 }
  
