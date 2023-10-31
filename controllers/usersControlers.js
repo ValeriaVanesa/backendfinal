@@ -4,21 +4,18 @@ const clientes= require('../models/usersModels');
 const bcrypt = require('bcrypt');
 const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
 const mongoose = require('mongoose');
-
-
+const path = require('path');
+require('../database/conexion');
 
 
 function usuarios(req,res){
 
-    res.sendFile('index4.html')
+    res.sendFile(path.resolve('public/index4.html'));
 
 
     
 }
 
-function login(req,res){
-    res.sendFile('index4.html')
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -63,9 +60,30 @@ const loginUsuario= async(req,res)=>{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
 module.exports= {
     usuarios,
-    login,
+  
     loginUsuario
     
 }

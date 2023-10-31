@@ -3,17 +3,64 @@ const app = express();
 const dotenv= require('dotenv');
 dotenv.config();
 const cors = require('cors');
-
 const bcrypt=require('bcrypt');
 const path= require('path');
-const usersRoutes = require('./router/userRouter');
 const jwt=require('./jwt');
+const { fork } = require('child_process');
+
+const infoCompraRoutes= require('./router/infoCompraRoutes');
+const condicionesRoutes = require('./router/condicionesRoutes');
+const calzadosRoutes = require('./router/calzadosRoutes');
+const politicaPrivacidadRoutes = require('./router/politicaPrivacidadRoutes');
+const bolsosRoutes = require('./router/bolsosRoutes');
+const perfumesRoutes = require('./router/perfumesRoutes');
+const bolsoCoralRoutes = require('./router/bolsoCoralRoutes');
+const bolsoBrownRoutes = require('./router/bolsoBrownRoutes');
+const mochilaBlackRoutes = require('./router/mochilaBlackRoutes');
+const zapatillaConverseRoutes = require('./router/zapatillaConverseRoutes');
+const shoesvansblackRoutes = require('./router/shoesvansblackRoutes');
+const zapatillaVansBordoRoutes = require('./router/zapatillaVansBordoRoutes');
+const botaVansRoutes = require('./router/botaVansRoutes');
+const zapatillaVansAzulRoutes = require('./router/zapatillaVansAzulRoutes');
+const mochilaLVRoutes = require('./router/mochilaLVRoutes');
+const mochilaPinkRoutes = require('./router/mochilaPinkRoutes');
+const carteraWhiteRoutes = require('./router/carteraWhiteRoutes');
+const perfumeTeaseRoutes = require('./router/perfumeTeaseRoutes');
+const perfumeBomshellRoutes = require('./router/perfumeBombshellRoutes');
+const perfumeBlushRoutes=require('./router/perfumeBlushRoutes');
+const perfumeLancomeRoutes=require('./router/perfumeLancomeRoutes');
+const perfumeMomParisRoutes=require('./router/perfumeMomParisRoutes');
+const perfumeMarcJacobsRoutes=require('./router/perfumeMarcJacobsRoutes');
+
+
+
+
+const usersRoutes = require('./router/userRouter');
 const suscripcionRoutes = require('./router/suscripcionRoutes');
 const compraRoutes = require('./router/compraRoutes');
 const contactoRoutes = require('./router/contactoRoutes');
+const cuentaRoutes = require('./router/cuentaRoutes');
 
-const crearCuentaRoutes = require('./router/crearCuentaRoutes');
-const { fork } = require('child_process');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const PORT = process.env.PORT;
@@ -41,15 +88,38 @@ app.use(express.static(path.join(__dirname,'public')));
 
 
 
+app.use('/infoCompra',infoCompraRoutes);
+app.use('/politicaPrivacidad',politicaPrivacidadRoutes)
+app.use('/condiciones',condicionesRoutes)
+app.use('/calzados',calzadosRoutes);
+app.use('/bolsos',bolsosRoutes);
+app.use('/perfumes',perfumesRoutes);
+app.use('/carteraCoral',bolsoCoralRoutes);
+app.use('/bolsoBrown',bolsoBrownRoutes);
+app.use ('/mochilaBlack',mochilaBlackRoutes);
+app.use('/zapatillaConverse',zapatillaConverseRoutes);
+app.use('/zapatillanegraVans',shoesvansblackRoutes);
+app.use('/vansBordo',zapatillaVansBordoRoutes);
+app.use('/botaVans',botaVansRoutes);
+app.use('/vansAzul',zapatillaVansAzulRoutes);
+app.use('/mochilaLV',mochilaLVRoutes);
+app.use('/mochilaPink',mochilaPinkRoutes);
+app.use('/carteraWhite',carteraWhiteRoutes);
+app.use('/perfumeTease',perfumeTeaseRoutes);
+app.use('/perfumeBombshell',perfumeBomshellRoutes);
+app.use('/perfumeBlush',perfumeBlushRoutes);
+app.use('/perfumeLancome',perfumeLancomeRoutes);
+app.use('/perfumeMomParis',perfumeMomParisRoutes);
+app.use('/perfumeMarcJacobs',perfumeMarcJacobsRoutes);
+
 
 
 
 app.use('/users', usersRoutes);
-
 app.use('/suscripcion',suscripcionRoutes);
 app.use('/compra',compraRoutes);
 app.use('/contacto',contactoRoutes);
-app.use('/crearcuenta', crearCuentaRoutes);
+app.use('/cuenta', cuentaRoutes);
 
 
 
@@ -69,7 +139,7 @@ res.sendFile('index.html');
 
 
 
-
+/*
 app.post('/users',(req,res)=>{
     const {email, password} = req.body;
     console.log(`Los datos recibidos son ${email} y ${password}`);
@@ -127,7 +197,7 @@ app.get('/datos',jwt.auth,(req,res)=>{
     })
 })
 
-
+*/
 
 
 

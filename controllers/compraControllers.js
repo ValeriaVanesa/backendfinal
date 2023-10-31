@@ -5,8 +5,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 const Productos= require('../models/compraModels');
 const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
-
+const path=require('path');
 const mongoose = require('mongoose');
+
+function compra (req,res){
+    res.sendFile(path.resolve('public/index2.html'));
+}
+
+
 
 //crear compra
 /*
@@ -241,6 +247,7 @@ const eliminarCompra = (req,res)=>{
 
 
 module.exports= {
+    compra,
     nuevaCompra,
     actualizarCompra,
     eliminarCompra

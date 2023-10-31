@@ -5,14 +5,13 @@ dotenv.config();
 const contactos = require('../models/contactoModels');
 const mongoose = require("mongoose");
 const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
+const path = require('path');
 
 
 
 function contacto (req,res){
-    res.send ('<h1> Comentarios de los usuarios');
+    res.sendFile(path.resolve('public/index5.html'));
 }
-
-
 //crear contacto
 
 const nuevoContacto = async(req,res)=>{

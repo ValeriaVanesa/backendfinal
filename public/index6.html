@@ -25,8 +25,8 @@
 
            <div class="registrarse">
               
-               <a href="index6.html">Crear cuenta</a> 
-               <a href="index4.html">Iniciar sesión</a>
+               <a href="/cuenta">Crear cuenta</a> 
+               <a href="/users">Iniciar sesión</a>
                <img src="./assets/imagenes/bolsacompras.png "alt="bolsa" id="img-carrito">
            </div>
            
@@ -34,18 +34,18 @@
            <nav>
             <div >
               <ul id="menu-horizontal">
-                  <li> <a href="./index.html">Inicio</a></li>
-                  <li><a href="index2.html">Productos</a>
+                  <li> <a href="./">Inicio</a></li>
+                  <li><a href="/compra">Productos</a>
                   <ul id="menu-vertical">
-                      <li><a href="index10.html">Bolsos & Carteras</a></li>
-                      <li><a href="index9.html">Calzados</a></li>
-                      <li><a href="index11.html">Perfumes</a></li>
+                      <li><a href="/bolsos">Bolsos & Carteras</a></li>
+                      <li><a href="/calzados">Calzados</a></li>
+                      <li><a href="/perfumes">Perfumes</a></li>
                   </ul>
                   </li>
 
 
-                  <li><a href="/index3.html">Cómo comprar</a></li>
-                  <li><a href="index5.html">Contacto</a></li>
+                  <li><a href="/infoCompra">Cómo comprar</a></li>
+                  <li><a href="/contacto">Contacto</a></li>
               </ul>
              </div> 
              
@@ -59,7 +59,7 @@
   
  
    <div>
-    <a id="inicio" href="index.html">Inicio</a> 
+    <a id="inicio" href="./">Inicio</a> 
     <p class="indexContacto">/Registrase</p>
 
 
@@ -80,7 +80,7 @@
     <br><br><br>
 <div id="registrarse">
     <div id="registro1">
-        <form action="/crearcuenta" method="post" class="form">
+        <form action="/cuenta/new" method="post" class="form">
             <h2>INFORMACIÓN PERSONAL</h2>
             <br>
         <label for="nombre">Nombre<span>*</span>
@@ -102,14 +102,13 @@
     
         </label>
         <br> 
-       <label for="email">
-        <input type="email" name="email" id="email">
-       </label>
-       <br>
-       <label for="password">
-        <input type="password" name="password" id="password">
-
-       </label>
+        <label for="email">EMAIL<span>*</span>
+            <input type="email" name="email" id="email">
+        </label>
+        <br>
+        <label for="password">CONTRASEÑA<span>*</span>
+            <input type="password" name="password" id="password">
+        </label>
 
     
         <button id="button2"type="submit">CREAR </button>
@@ -171,11 +170,11 @@
         <h3 >NAVEGACIÓN</h3>
         <br>
          <ul>
-           <li><a href="index.html">Inicio</a></li>
-           <li><a href="index2.html">Productos</a></li>
-           <li><a href="index3.html">Cómo comprar</a></li>
+           <li><a href="./">Inicio</a></li>
+           <li><a href="/compra">Productos</a></li>
+           <li><a href="/infoCompra">Cómo comprar</a></li>
         
-           <li><a href="index5.html">Contacto</a></li>
+           <li><a href="/contacto">Contacto</a></li>
          </ul>
     </div>
 <br>
@@ -223,8 +222,8 @@
 <br>
 
 <ul>
-    <li><a href="index7.html">Politicas de Privacidad</a></li>
-    <li><a href="index8.html">Terminos y Condiciones</a></li>
+    <li><a href="/politicaPrivacidad">Politicas de Privacidad</a></li>
+    <li><a href="/condiciones">Terminos y Condiciones</a></li>
 </ul>
 
 

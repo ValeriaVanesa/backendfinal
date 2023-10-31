@@ -4,11 +4,11 @@ dotenv.config();
 const suscripciones = require('../models/suscripcionModels');
 const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
 const mongoose = require('mongoose');
-
+const path = require('path');
 //NEWSLETTER , suscripcion a noticias
 
 function Suscripciones (req,res){
-res.send( '<h1> Usuarios suscritos</h1');
+res.sendFile( path.resolve(' /public/index.html'));
 }
 
 //crear suscripcion
@@ -30,6 +30,8 @@ const nuevoUsuario = async(req,res)=>{
                 return res.json({
                     data:'gracias por suscribirte' // AGREGAR SWEET ALERT
                 })
+
+                
             }
             datosUsuario = new suscripciones(data);
             console.log(`${datosUsuario}`);
