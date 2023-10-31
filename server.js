@@ -6,7 +6,7 @@ const cors = require('cors');
 const bcrypt=require('bcrypt');
 const path= require('path');
 const jwt=require('./jwt');
-const { fork } = require('child_process');
+
 
 const infoCompraRoutes= require('./router/infoCompraRoutes');
 const condicionesRoutes = require('./router/condicionesRoutes');
@@ -40,7 +40,6 @@ const suscripcionRoutes = require('./router/suscripcionRoutes');
 const compraRoutes = require('./router/compraRoutes');
 const contactoRoutes = require('./router/contactoRoutes');
 const cuentaRoutes = require('./router/cuentaRoutes');
-<<<<<<< HEAD
 
 
 
@@ -62,9 +61,10 @@ const cuentaRoutes = require('./router/cuentaRoutes');
 
 
 
-=======
+
+
 const { fork } = require('child_process');
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+
 
 
 const PORT = process.env.PORT;
@@ -82,7 +82,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-<<<<<<< HEAD
+
 app.use(express.static(path.join(__dirname,'public')));
 
 
@@ -126,9 +126,9 @@ app.use('/cuenta', cuentaRoutes);
 
 
 
-=======
+
 app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+
 
 //RUTAS//
 
@@ -175,7 +175,6 @@ app.use('/cuenta', cuentaRoutes);
 //     }
 // });
 
-<<<<<<< HEAD
 
 /*
 app.post('/users',(req,res)=>{
@@ -232,7 +231,7 @@ app.post('/crearcuenta',(req,res)=>{
 //         for (let i = 0 ; i < clientes.lengt; i++) {
 //             console.log(clientes[i]);
             
-<<<<<<< HEAD
+
         }
         res.send('los datos han sido registrados');
 })
@@ -251,11 +250,11 @@ app.get('/datos',jwt.auth,(req,res)=>{
 
 
 
-=======
+
 //         }
 //         res.send('los datos han sido registrados');
 // })
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+
 
 // app.get('/datos',jwt.auth,(req,res)=>{
 //     res.json({

@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const path = require('path');
 const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
 
-<<<<<<< HEAD:controllers/cuentaControllers.js
 
 
 
@@ -18,10 +17,10 @@ function crearCuenta(req,res){
 /*
 const registroUsuario=(req,res)=>{
 res.sendFile('index6.html')
-=======
+
 function crearCuenta(req,res){
     res.sendFile(path.resolve('public/index6.html'));
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6:controllers/crearCuentaControllers.js
+
 }
 */
 
@@ -29,7 +28,6 @@ function crearCuenta(req,res){
 //CRUD
 
 //Mostrar--------------------------------------------------------------------------------------------------------------------
-<<<<<<< HEAD:controllers/cuentaControllers.js
 
 
 
@@ -37,7 +35,7 @@ function crearCuenta(req,res){
 
 const showUsers = async()=>{
     const usuarios = await clientes.find()
-    res.send(usuarios);
+     res.send(usuarios);
         
         
       
@@ -49,13 +47,7 @@ const showUsers = async()=>{
 
 
 
-=======
-//REVISAR
-const showUsers = async(req, res) => {
-    const usuarios = await clientes.find()
-    res.send(usuarios);
-}
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6:controllers/crearCuentaControllers.js
+
 
 //REVISAR
 //crear cuenta---------------------------------------------------------------------------------------------------------------
@@ -71,7 +63,7 @@ const nuevaCuenta = async (req,res) => {
         password:password
     }
 
-<<<<<<< HEAD:controllers/cuentaControllers.js
+
  
 
 try{
@@ -107,24 +99,8 @@ return res.send({error:false, code:0, message:' Su cuenta se ha creado correctam
 
 
 
-=======
-    try{
-        // let datosUsuario = await clientes.findOne({ email });
-        let datosUsuario = false;
-        if(datosUsuario){
-            res.send({error: true, code: 1, message: ''});
-        }
 
-        // datosUsuario = new clientes(datos);
-        // await datosUsuario.save();
 
-        return res.send({error: false, code: 0, message: 'Su cuenta se creo correctamente'});//('Se ha registrado con éxito'); //AGREGAR SWEET ALERT
-    }catch(error){
-        return res.send({error: true, code:2, message: error}); // AGREGAR SWEET ALERT
-    }
-}
-
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6:controllers/crearCuentaControllers.js
 
 
 
@@ -157,13 +133,12 @@ console.log(usuarios)
 eliminarCuenta('65330330fd4f141e5d418477');
 
 module.exports={
-<<<<<<< HEAD:controllers/cuentaControllers.js
+
    crearCuenta,
    showUsers,
-=======
-    crearCuenta,
-    showUsers,
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6:controllers/crearCuentaControllers.js
+
+ 
+
     nuevaCuenta,
     actualizarCuenta,
     eliminarCuenta

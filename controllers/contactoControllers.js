@@ -4,11 +4,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 const contactos = require('../models/contactoModels');
 const mongoose = require("mongoose");
-<<<<<<< HEAD
-const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
-=======
+
+const MONGO_URL_LOCAL= process.env.MONGO_URL_LOCAL;
+
 const MONGO_URL_ATLAS = process.env.MONGO_URL_ATLAS;
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+
 const path = require('path');
 
 

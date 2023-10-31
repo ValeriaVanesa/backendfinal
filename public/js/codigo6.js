@@ -8,11 +8,10 @@ $(document).ready(function () {
       const fechaNacimiento = document.getElementById("fechaNacimiento");
       const dni = document.getElementById("dni");
       const email = document.getElementById("email");
-<<<<<<< HEAD
+
       const password = document.getElementById("password");
-=======
-      const contraseña = document.getElementById("password");
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+
+
 
       const regexNombre = new RegExp("^[a-zA-Z]{4,16}$");
       const regexApellido = new RegExp("^[a-zA-Z]{4,16}$");
@@ -41,11 +40,9 @@ $(document).ready(function () {
          fechaNacimiento: fechaNacimiento.value,
          dni: dni.value,
          email: email.value,
-<<<<<<< HEAD
+
          password: password.value
-=======
-         contraseña: contraseña.value
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+
       };
 
       let url = '/cuenta/new';
@@ -119,8 +116,4 @@ const crearCuenta = async (url, data) => {
    });
    const responseJson = await response.json();
    return responseJson;
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> a29da6ddeb52478e873dc9ababea5ad5b4fc2aa6
+ }
