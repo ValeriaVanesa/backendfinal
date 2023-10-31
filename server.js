@@ -7,7 +7,7 @@ const bcrypt=require('bcrypt');
 const path= require('path');
 const jwt=require('./jwt');
 
-
+const indexRoutes= require('./router/indexRoutes');
 const infoCompraRoutes= require('./router/infoCompraRoutes');
 const condicionesRoutes = require('./router/condicionesRoutes');
 const calzadosRoutes = require('./router/calzadosRoutes');
@@ -118,9 +118,9 @@ app.use('/perfumeMarcJacobs',perfumeMarcJacobsRoutes);
 app.use('/users', usersRoutes);
 app.use('/suscripcion',suscripcionRoutes);
 app.use('/compra',compraRoutes);
-app.use('/contacto',contactoRoutes);
+app.use('/contactos',contactoRoutes);
 app.use('/cuenta', cuentaRoutes);
-
+app.use('/', indexRoutes);
 
 
 
@@ -129,19 +129,11 @@ app.use('/cuenta', cuentaRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//RUTAS//
-
-app.get('/',(req,res)=>{
-
-    res.sendFile('index.html');
-});
-
 // app.use('/users', usersRoutes);
 // app.use('/suscripcion',suscripcionRoutes);
 // app.use('/compra',compraRoutes);
-app.use('/contacto',contactoRoutes);
-app.use('/cuenta', cuentaRoutes);
+// app.use('/contacto',contactoRoutes);
+// app.use('/cuenta', cuentaRoutes);
 
 // app.post('/users',(req,res)=>{
 //     const {email, password} = req.body;

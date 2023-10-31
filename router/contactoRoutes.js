@@ -9,8 +9,8 @@ const{
     eliminarContacto
 }= require('../controllers/contactoControllers');
 
-router.get('/',contacto);
-router.post('/',nuevoContacto);
+router.get('/', contacto);
+router.post('/nuevoContacto', nuevoContacto);
 router.put( '/:id', actualizarContacto);
 router.delete( '/:id', eliminarContacto);
 module.exports= router;

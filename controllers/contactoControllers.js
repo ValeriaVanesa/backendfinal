@@ -31,25 +31,24 @@ const nuevoContacto = async(req,res)=>{
     }
     
     try{
-        let datosContacto = await contactos.findOne({email,nombre,telefono,comentario})
-        if(datosContacto){
-            return res.json({
-                data:'mensaje enviado' //AGREGAR SWEET ALERT
-            })
-        }
+        // let datosContacto = await contactos.findOne({email,nombre,telefono,comentario})
         datosContacto = new contactos(data);
-        console.log(`${datosContacto}`);
         await datosContacto.save();
+        //LOGICA DEL ENVIO DE CORREO
+        return res.json({
+            error: false,
+            code: 0,
+            message: 'Su consulta se ha enviado correctamente.' 
+        })
+        // datosContacto = new contactos(data);
+        // await datosContacto.save();
     }catch(error){
-        return res.send('No se pudo enviar tu mensaje');
+        return res.json({
+            error: true,
+            code: 1,
+            message: 'Error al enviar la consulta.' 
+        })
     }
-        
-    res.json({
-        email,
-        nombre,
-        telefono,
-        comentario
-    })
 }
         
 

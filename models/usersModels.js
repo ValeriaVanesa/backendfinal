@@ -36,6 +36,7 @@ timestamp:{
 
 
 });
+
 clienteSchema.pre('save',function(next){
     bcrypt.genSalt(10).then(salts=>{
         bcrypt.hash(this.password,salts).then(hash=>{
@@ -45,9 +46,6 @@ clienteSchema.pre('save',function(next){
    
     }).catch(error => next(error));
 });
-
-
-
 
 const clientes = mongoose.model('clientes',clienteSchema);
 module.exports = clientes;

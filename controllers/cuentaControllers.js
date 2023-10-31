@@ -33,7 +33,7 @@ function crearCuenta(req,res){
 
 
 
-const showUsers = async()=>{
+const showUsers = async(req, res)=>{
     const usuarios = await clientes.find()
      res.send(usuarios);
         
@@ -63,35 +63,35 @@ const nuevaCuenta = async (req,res) => {
         password:password
     }
 
+    try {
+        
+        let datosUsuario = await clientes.findOne({ email });
+        
+        if(datosUsuario){
+            res.send({
+                error: true,
+                code: 1,
+                message: "Ya existe el usuario."
+            })
+        }
 
- 
+        datosUsuario = new clientes(datos);
 
-try{
-//let datosUsuario = await clientes.findOne({email});
+        await datosUsuario.save();
 
+        res.send({
+            error: false,
+            code: 0,
+            message: 'Su cuenta se ha creado correctamente'
+        });
 
-let datosUsuario = false;
-
-if(datosUsuario){
-   res.send({error:true,code:1,message:""})
-
-
-}
-//datosUsuario = new clientes(datos);
-//console.log(`${datosUsuario}`);
-
-
-//await datosUsuario.save();
-
-return res.send({error:false, code:0, message:' Su cuenta se ha creado correctamente' } );
-
- 
-
-}catch(error){
-    return res.send({error:true,code:2, message:error});  
-
-   
-}
+    }catch(error){
+        return res.send({
+            error: true,
+            code: 2,
+            message: error
+        });  
+    }
 
 }
 
@@ -107,30 +107,73 @@ return res.send({error:false, code:0, message:' Su cuenta se ha creado correctam
 
 //actualizar------------------------------------------------------------------------------------
 
-const actualizarCuenta = async(id)=>{
-    const usuarios= await clientes.updateOne({_id:id},
-        {
-          $set:{
-        nombre: 'Valeria',
-        apellido:'Klos',
-        fechaNacimiento:'2023-10-13T20:48',
-        dni:'38998001',
-        email:'valetheangel95@gmail.com',
-        password:'Valeria'
-        
-
-          }
-        })
+const actualizarCuenta = async (req, res) => {
+    //BUSCAR EL USUARIO
+    try {
+        let datosUsuario = await clientes.findOne({ _id: req.body.id });
+        if(!datosUsuario){
+            return res.send({
+                error: true,
+                code: 1,
+                message: "No se encontro el usuario a modificar."
+            })
+            // throw new Error("No se encontro el usuario para modificar.")
+        }
+        //MODIFICAR EL USUARIO
+        const usuarios= await clientes.updateOne({_id:req.body.id},
+            {
+                $set:{
+                    nombre: req.body.nombre,
+                    apellido: req.body.apellido,
+                    fechaNacimiento: req.body.fechaNacimiento,
+                    dni: req.body.dni,
+                    email: req.body.email,
+                    password: req.body.password
+                }
+            })
+        if (usuarios.modifiedCount > 0) {
+            return res.send({
+                error: false,
+                data: "",
+                message: "Se modifico correctamente el usuario."
+            });
+        } else {
+            return res.send({
+                error: true,
+                data: "",
+                message: "No se modifico nada del usuario encontrado."
+            });
+        }
+    } catch (error) {
+        return res.send({
+            error: true,
+            data: "",
+            message: error
+        });
+    }
+    
 }
-actualizarCuenta('65332b587e610f24fd86e85d');
 
 //eliminar---------------------------------------------------------------------------------------
 
-const eliminarCuenta = async(id)=>{
-const usuarios = await clientes.deleteOne({_id:id})
-console.log(usuarios)
+const eliminarCuenta = async (req, res) => {
+
+    const usuarios = await clientes.deleteOne({ _id: req.body.id })
+    if (usuarios.deletedCount > 0) {
+        res.send({
+            error: false,
+            data: "",
+            message: "Se elimino correctamente el usuario."
+        });
+    } else { 
+        res.send({
+            error: true,
+            data: "",
+            message: "No se encontro el usuario para eliminarlo."
+        });
+    }
+    console.log(usuarios.deletedCount);
 }
-eliminarCuenta('65330330fd4f141e5d418477');
 
 module.exports={
 
