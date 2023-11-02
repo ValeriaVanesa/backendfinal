@@ -7,7 +7,6 @@ const bcrypt=require('bcrypt');
 const path= require('path');
 const jwt=require('./jwt');
 
-
 const infoCompraRoutes= require('./router/infoCompraRoutes');
 const condicionesRoutes = require('./router/condicionesRoutes');
 const calzadosRoutes = require('./router/calzadosRoutes');
@@ -36,7 +35,7 @@ const perfumeMarcJacobsRoutes=require('./router/perfumeMarcJacobsRoutes');
 
 
 const usersRoutes = require('./router/userRouter');
-const suscripcionRoutes = require('./router/suscripcionRoutes');
+
 const compraRoutes = require('./router/compraRoutes');
 const contactoRoutes = require('./router/contactoRoutes');
 const cuentaRoutes = require('./router/cuentaRoutes');
@@ -116,7 +115,7 @@ app.use('/perfumeMarcJacobs',perfumeMarcJacobsRoutes);
 
 
 app.use('/users', usersRoutes);
-app.use('/suscripcion',suscripcionRoutes);
+
 app.use('/compra',compraRoutes);
 app.use('/contacto',contactoRoutes);
 app.use('/cuenta', cuentaRoutes);
@@ -130,18 +129,6 @@ app.use('/cuenta', cuentaRoutes);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//RUTAS//
-
-app.get('/',(req,res)=>{
-
-    res.sendFile('index.html');
-});
-
-// app.use('/users', usersRoutes);
-// app.use('/suscripcion',suscripcionRoutes);
-// app.use('/compra',compraRoutes);
-app.use('/contacto',contactoRoutes);
-app.use('/cuenta', cuentaRoutes);
 
 // app.post('/users',(req,res)=>{
 //     const {email, password} = req.body;
@@ -261,6 +248,10 @@ app.get('/datos',jwt.auth,(req,res)=>{
 //         datos:"Tenemos tu token"
 //     })
 // })
+
+app.get('/',(req,res)=>{
+    res.sendFile('index.html');
+})
 
 app.listen(PORT,(err)=>{
     if(err) {throw err}

@@ -29,29 +29,29 @@
 
             <a href="cuenta">Crear cuenta</a>
             <a href="/users">Iniciar sesión</a>
-            <img src="./assets/imagenes/bolsacompras.png " alt="bolsa" id="img-carrito">
+           
         </div>
 
-      
+
         <nav>
-            <div >
-              <ul id="menu-horizontal">
-                  <li> <a href="./">Inicio</a></li>
-                  <li><a href="/compra">Productos</a>
-                  <ul id="menu-vertical">
-                      <li><a href="/bolsos">Bolsos & Carteras</a></li>
-                      <li><a href="/calzados">Calzados</a></li>
-                      <li><a href="/perfumes">Perfumes</a></li>
-                  </ul>
-                  </li>
+            <div>
+                <ul id="menu-horizontal">
+                    <li> <a href="./">Inicio</a></li>
+                    <li><a href="/compra">Productos</a>
+                        <ul id="menu-vertical">
+                            <li><a href="/bolsos">Bolsos & Carteras</a></li>
+                            <li><a href="/calzados">Calzados</a></li>
+                            <li><a href="/perfumes">Perfumes</a></li>
+                        </ul>
+                    </li>
 
 
-                  <li><a href="/infoCompra">Cómo comprar</a></li>
-                  <li><a href="/contacto">Contacto</a></li>
-              </ul>
-             </div> 
-             
-           </nav>
+                    <li><a href="/infoCompra">Cómo comprar</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                </ul>
+            </div>
+
+        </nav>
     </section>
 
 
@@ -72,15 +72,8 @@
     <div class="formulario">
         <legend>¡Envianos tu consulta!</legend>
 
-        <form action="/contacto" method="post" id="form">
-            <!-- <div id="grupo_nombre">
-                <label for="Nombre">
-                    <p class="name">Nombre <span>*</span></p>
-                    <input type="text" name="nombre" id="nombre" title="Nombre solo acepta letras y espacios en blanco"
-                        minlength="4" maxlength="20" pattern="^[a-zA-Z]{4,16}$" required>
-                </label>
-            </div> -->
-
+        <form id="form">
+     
             <div id="grupo_nombre">
                 <label for="Nombre">
                     <p class="name">Nombre <span>*</span></p>
@@ -90,12 +83,7 @@
             </div>
 
 
-            <!-- <label for="Email">
-                <p class="correoE">Correo electrónico <span>*</span></p>
-                <input type="email" name="email" id="email" title="Email incorrecto" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                    required>
-
-            </label> -->
+          
 
             <label for="Email">
                 <p class="correoE">Correo electrónico <span>*</span></p>
@@ -103,21 +91,13 @@
 
             </label>
 
-            <!-- <label for="telefono">
-                <p class="phoneNumber">Número de teléfono <span>*</span></p>
-                <input type="text" name="telefono" id="telefono" pattern="^[0-9]{8,12}$" required>
-            </label> -->
 
             <label for="telefono">
                 <p class="phoneNumber">Número de teléfono <span>*</span></p>
                 <input type="text" name="telefono" id="telefono">
             </label>
 
-            <!-- <p class="coment">¿En qué podemos ayudarte? <span>*</span></p>
-            <textarea name="comentario" id="comentario" cols="30" rows="10"
-                title="Tu comentario no debe exceder los 255 caracteres" pattern="^.{1,255}$" required></textarea>
-
-            <br> -->
+         
 
             <p class="coment">¿En qué podemos ayudarte? <span>*</span></p>
             <textarea name="comentario" id="comentario" cols="30" rows="10"
@@ -126,20 +106,18 @@
             <br>
 
 
-            <!-- <input type="button" name="enviando" value="Enviar"> -->
+           
 
             <button id="enviando">Enviar</button>
 
-            <div id="div_mensaje_enviando" >
-                <p>Tu consulta está siendo enviada</p>
-            </div>
+          
             <br>
-           
+
 
 
         </form>
 
-        
+
 
 
 

@@ -10,14 +10,31 @@ const MONGO_URL_LOCAL= process.env.MONGO_URL_LOCAL;
 const MONGO_URL_ATLAS = process.env.MONGO_URL_ATLAS;
 
 const path = require('path');
+const clientes = require("../models/usersModels");
 
 
 
 function contacto (req,res){
     res.sendFile(path.resolve('public/index5.html'));
 }
+
+
+//Mostrar------------------------------------------------------------------------------
+
+const mostrarConsultas = async(req,res)=>{
+    const usuarios = await clientes.find()
+    res.send(usuarios)
+}
+
+
+
+
+
+
+
 //crear contacto
-//FALTA HACER
+
+
 const nuevoContacto = async(req,res)=>{
     
     const { email, nombre, telefono, comentario  }  = req.body;
@@ -31,60 +48,103 @@ const nuevoContacto = async(req,res)=>{
     }
     
     try{
-        let datosContacto = await contactos.findOne({email,nombre,telefono,comentario})
-        if(datosContacto){
-            return res.json({
-                data:'mensaje enviado' //AGREGAR SWEET ALERT
-            })
-        }
-        datosContacto = new contactos(data);
-        console.log(`${datosContacto}`);
-        await datosContacto.save();
-    }catch(error){
-        return res.send('No se pudo enviar tu mensaje');
-    }
         
-    res.json({
-        email,
-        nombre,
-        telefono,
-        comentario
-    })
+        datosContacto = new contactos(data);
+        await datosContacto.save();
+        //LOGICA DEL ENVIO DE CORREO
+        return res.json({
+            error: false,
+            code: 0,
+            message: 'Su consulta se ha enviado correctamente.' 
+        })
+
+       
+      
+    }catch(error){
+        return res.json({
+            error: true,
+            code: 1,
+            message: 'Error al enviar la consulta.' 
+        })
+    }
 }
         
 
 //actualizar--------------------------------------------------------------------------
-//FALTA HACER
-const actualizarContacto = async(id)=>{
-    const usuarios= await contactos.updateOne({_id:id},
+
+
+const actualizarContacto = async(req,res)=>{
+    try{
+        let datosContacto = await clientes.findOne({_id:req.body.id});
+        if(!datosContacto){
+            return res.send({
+                error:true,
+                code:1,
+                message:"No se encontro el contacto a modificar."
+            })
+        }
+
+
+        const usuarios = await clientes.updateOne({_id:req.body.id},
         {
-          $set:{
-        nombre: 'Valeria',
-        apellido:'Klos',
-        fechaNacimiento:'2023-10-13T20:48',
-        dni:'38998001',
-        email:'valetheangel95@gmail.com',
-        password:'Valeria'
-        
-
-          }
+            $set:{
+                nombre: req.body.nombre,
+                apellido:req.body.apellido,
+                fechaNacimiento:req.body.fechaNacimiento,
+                dni:req.body.dni,
+                email:req.body.email,
+                password:req.boy.password
+                
+            }
         })
+        if(usuarios.modifiedCount > 0){
+            return res.send({
+                error:false,
+                data:"",
+                message:"Se modifico correctamente el contacto."
+            });
+        }else{
+            return res.send({
+                error:true,
+                data:"",
+                message:"No se modifico el contacto."
+            });
+        }
+    }catch(error){
+        return res.send({
+            error:true,
+            data:"",
+            message:error
+        });
+    }
 }
-actualizarContacto('6538a5a3ad6e395ef7f8b500');
-
 
 //eliminar----------------------------------------------------------------------------
-//FALTA HACER
-const eliminarContacto = async(id)=>{
-    const usuarios = await contactos.deleteOne({_id:id})
-    console.log(usuarios)
+
+ 
+const eliminarContacto = async(req,res)=>{
+    const usuarios = await clientes.deleteOne({_id:req.body.id})
+    if(usuarios.deletedCount > 0){
+        res.send({
+            error:false,
+            data:"",
+            message:"Se elimino correctamente la consulta."
+        });
+
+    }else{
+        res.send({
+            error:true,
+            data:"",
+            message:"No se encontro la consulta para eliminarla."
+        })
     }
-    eliminarContacto('6538a5a3ad6e395ef7f8b500');
+    console.log(usuarios.deletedCount);
+}
 
 module.exports={
-    contacto,
-    nuevoContacto,
-    actualizarContacto,
-    eliminarContacto
+contacto,
+mostrarConsultas,
+nuevoContacto,
+actualizarContacto,
+eliminarContacto
 }
- 

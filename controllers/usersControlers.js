@@ -30,25 +30,50 @@ const loginUsuario= async(req,res)=>{
 
 
     const {email, password} = req.body;
-    console.log(` Los datos del usuario son email: ${email} y contraseña:${password}`);
+    //console.log(` Los datos del usuario son email: ${email} y contraseña:${password}`);
+   
+   const datos={
+    email:email,
+    password:password
+   }
+   
+   
+   
+   
     try{
         let loginUser = await clientes.findOne({email});
         console.log(`${loginUser}` )
 
         if(!loginUser){
-            return res.send('El usuario no existe');
-           
+            return res.send({
+                error:true,
+                code:1,
+                message:"El usuario no existe"
+            })
         }
    
 
         const validacionContraseña = bcrypt.compareSync(password, loginUser.password);
         console.log(`${validacionContraseña}`);
+
+         // loginUser = new clientes(datos);
+         //await loginUser.save();
+
+
         if(loginUser){
-        return  res.send(`usuario logueado `)
+       return res.send({
+            error:false,
+            code:0,
+            message:"Bienvenido"
+        })
     }
             
-        }catch{
-            return res.send('error en el sistema');
+        }catch(error){
+            return res.send({
+                error:true,
+                code:2,
+                message:error
+            });
         }
  
        
