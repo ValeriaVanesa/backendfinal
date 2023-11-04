@@ -6,6 +6,7 @@ const MONGO_URL_ATLAS= process.env.MONGO_URL_ATLAS;
 const mongoose = require('mongoose');
 const path = require('path');
 require('../database/conexion');
+const jwt=require('../jwt');
 
 
 function usuarios(req,res){
@@ -30,15 +31,16 @@ const loginUsuario= async(req,res)=>{
 
 
     const {email, password} = req.body;
-    //console.log(` Los datos del usuario son email: ${email} y contraseña:${password}`);
+    console.log(` Los datos del usuario son email: ${email} y contraseña:${password}`);
    
+
+
+
    const datos={
-    email:email,
-    password:password
+   email:email,
+  password:password
    }
-   
-   
-   
+
    
     try{
         let loginUser = await clientes.findOne({email});
@@ -50,8 +52,9 @@ const loginUsuario= async(req,res)=>{
                 code:1,
                 message:"El usuario no existe"
             })
+           
         }
-   
+      
 
         const validacionContraseña = bcrypt.compareSync(password, loginUser.password);
         console.log(`${validacionContraseña}`);
@@ -64,7 +67,8 @@ const loginUsuario= async(req,res)=>{
        return res.send({
             error:false,
             code:0,
-            message:"Bienvenido"
+            message:"Bienvenido",
+          
         })
     }
             
@@ -82,29 +86,6 @@ const loginUsuario= async(req,res)=>{
     
   
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
 
 module.exports= {
     usuarios,

@@ -32,7 +32,10 @@ password:{
 timestamp:{
     type:Date,
     default:Date.now()
-}
+},
+accessToken: 
+{ type: String, 
+default: null }
 
 
 });
@@ -45,7 +48,6 @@ clienteSchema.pre('save',function(next){
    
     }).catch(error => next(error));
 });
-
 
 
 

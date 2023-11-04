@@ -10,7 +10,8 @@ const MONGO_URL_LOCAL= process.env.MONGO_URL_LOCAL;
 const MONGO_URL_ATLAS = process.env.MONGO_URL_ATLAS;
 
 const path = require('path');
-const clientes = require("../models/usersModels");
+
+require('../database/conexion');
 
 
 
@@ -22,7 +23,7 @@ function contacto (req,res){
 //Mostrar------------------------------------------------------------------------------
 
 const mostrarConsultas = async(req,res)=>{
-    const usuarios = await clientes.find()
+    const usuarios = await contactos.find()
     res.send(usuarios)
 }
 
@@ -75,7 +76,7 @@ const nuevoContacto = async(req,res)=>{
 
 const actualizarContacto = async(req,res)=>{
     try{
-        let datosContacto = await clientes.findOne({_id:req.body.id});
+        let datosContacto = await contactos.findOne({_id:req.body.id});
         if(!datosContacto){
             return res.send({
                 error:true,
@@ -85,7 +86,7 @@ const actualizarContacto = async(req,res)=>{
         }
 
 
-        const usuarios = await clientes.updateOne({_id:req.body.id},
+        const usuarios = await contactos.updateOne({_id:req.body.id},
         {
             $set:{
                 nombre: req.body.nombre,
@@ -123,7 +124,7 @@ const actualizarContacto = async(req,res)=>{
 
  
 const eliminarContacto = async(req,res)=>{
-    const usuarios = await clientes.deleteOne({_id:req.body.id})
+    const usuarios = await contactos.deleteOne({_id:req.body.id})
     if(usuarios.deletedCount > 0){
         res.send({
             error:false,

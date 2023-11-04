@@ -2,7 +2,7 @@
 
 
 
-$(document).ready(function(){
+ $(document).ready(function(){
 
    $("#loginSubmit").click( async function (e) {
       e.preventDefault();
