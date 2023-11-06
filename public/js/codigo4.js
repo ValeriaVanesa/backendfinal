@@ -46,7 +46,7 @@
 
     if (response.error == true) {
        if (response.code == 1) {
-          Swal.fire({
+         Swal.fire({
              icon: 'warning',
              title: 'Cuidado',
              text: 'Usuario no existente'
@@ -60,20 +60,23 @@
              text: 'Error al iniciar sesión.'
           });
        }
-    } else if (response.error == false) { 
+    } else if(response.error == false) { 
+     // return res.sendFile(path.resolve('public/admin.html'));
+      
        Swal.fire({
-          position: 'center',
+        position: 'center',
           icon: 'success',
           title: response.message,
-          showConfirmButton: false,
+         showConfirmButton: false,
           timer: 2500
        });
        //RESETEAR FORMULARIO Y COLORES VERDE DE LAS CLASES
       }
-
-   });
+   
+   })
+ });
  
-});
+
 
 const validar = (input, expreg) => { 
 

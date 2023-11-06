@@ -3,50 +3,47 @@ const app = express();
 const dotenv= require('dotenv');
 dotenv.config();
 const cors = require('cors');
-const bcrypt=require('bcrypt');
+
 const path= require('path');
-const jwt=require('./jwt');
-const jsonwtoken = require ('jsonwebtoken');
+
 require('./database/conexion');
 const cliente= require('./models/usersModels');
-//const session= require('express-session');
-//const FileStore = require('session-file-store')(session);
-const clave = process.env.SESSION_SECRET;
-
-const infoCompraRoutes= require('./router/infoCompraRoutes');
-const condicionesRoutes = require('./router/condicionesRoutes');
-const calzadosRoutes = require('./router/calzadosRoutes');
-const politicaPrivacidadRoutes = require('./router/politicaPrivacidadRoutes');
-const bolsosRoutes = require('./router/bolsosRoutes');
-const perfumesRoutes = require('./router/perfumesRoutes');
-const bolsoCoralRoutes = require('./router/bolsoCoralRoutes');
-const bolsoBrownRoutes = require('./router/bolsoBrownRoutes');
-const mochilaBlackRoutes = require('./router/mochilaBlackRoutes');
-const zapatillaConverseRoutes = require('./router/zapatillaConverseRoutes');
-const shoesvansblackRoutes = require('./router/shoesvansblackRoutes');
-const zapatillaVansBordoRoutes = require('./router/zapatillaVansBordoRoutes');
-const botaVansRoutes = require('./router/botaVansRoutes');
-const zapatillaVansAzulRoutes = require('./router/zapatillaVansAzulRoutes');
-const mochilaLVRoutes = require('./router/mochilaLVRoutes');
-const mochilaPinkRoutes = require('./router/mochilaPinkRoutes');
-const carteraWhiteRoutes = require('./router/carteraWhiteRoutes');
-const perfumeTeaseRoutes = require('./router/perfumeTeaseRoutes');
-const perfumeBomshellRoutes = require('./router/perfumeBombshellRoutes');
-const perfumeBlushRoutes=require('./router/perfumeBlushRoutes');
-const perfumeLancomeRoutes=require('./router/perfumeLancomeRoutes');
-const perfumeMomParisRoutes=require('./router/perfumeMomParisRoutes');
-const perfumeMarcJacobsRoutes=require('./router/perfumeMarcJacobsRoutes');
+const session= require('express-session');
+const FileStore = require('session-file-store')(session);
 
 
+const infoCompraRoutes= require('./router/usuario/infoCompraRoutes');
+const condicionesRoutes = require('./router/usuario/condicionesRoutes');
+const calzadosRoutes = require('./router/productos/calzadosRoutes');
+const politicaPrivacidadRoutes = require('./router/usuario/politicaPrivacidadRoutes');
+const bolsosRoutes = require('./router/productos/bolsosRoutes');
+const perfumesRoutes = require('./router/productos/perfumesRoutes');
+const bolsoCoralRoutes = require('./router/productos/bolsoCoralRoutes');
+const bolsoBrownRoutes = require('./router/productos/bolsoBrownRoutes');
+const mochilaBlackRoutes = require('./router/productos/mochilaBlackRoutes');
+const zapatillaConverseRoutes = require('./router/productos/zapatillaConverseRoutes');
+const shoesvansblackRoutes = require('./router/productos/shoesvansblackRoutes');
+const zapatillaVansBordoRoutes = require('./router/productos/zapatillaVansBordoRoutes');
+const botaVansRoutes = require('./router/productos/botaVansRoutes');
+const zapatillaVansAzulRoutes = require('./router/productos/zapatillaVansAzulRoutes');
+const mochilaLVRoutes = require('./router/productos/mochilaLVRoutes');
+const mochilaPinkRoutes = require('./router/productos/mochilaPinkRoutes');
+const carteraWhiteRoutes = require('./router/productos/carteraWhiteRoutes');
+const perfumeTeaseRoutes = require('./router/productos/perfumeTeaseRoutes');
+const perfumeBomshellRoutes = require('./router/productos/perfumeBombshellRoutes');
+const perfumeBlushRoutes=require('./router/productos/perfumeBlushRoutes');
+const perfumeLancomeRoutes=require('./router/productos/perfumeLancomeRoutes');
+const perfumeMomParisRoutes=require('./router/productos/perfumeMomParisRoutes');
+const perfumeMarcJacobsRoutes=require('./router/productos/perfumeMarcJacobsRoutes');
 
 
-const usersRoutes = require('./router/userRouter');
+const usersRoutes = require('./router/usuario/userRouter');
 
-const compraRoutes = require('./router/compraRoutes');
-const contactoRoutes = require('./router/contactoRoutes');
-const cuentaRoutes = require('./router/cuentaRoutes');
-const indexRoutes = require('./router/indexRoutes');
-
+const compraRoutes = require('./router/usuario/compraRoutes');
+const contactoRoutes = require('./router/usuario/contactoRoutes');
+const cuentaRoutes = require('./router/usuario/cuentaRoutes');
+const indexRoutes = require('./router/usuario/indexRoutes');
+const loginRoutes = require('./router/usuario/loginRoutes');
 
 
 const PORT = process.env.PORT;
@@ -61,37 +58,36 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'public')));
 
 
-/*
 
+/*
  //UTILIZAMOS EL MIDELWARE DE LA SESSION
  app.use(session({
-    store: new FileStore({path:'./sessions',ttl:60}),
-    secret: clave,
+     secret: 'misession_secreta',
     saveUninitialized:false,
+    name:'secret-name',
     resave:false,
+    //store: new FileStore({path:'./sessions',ttl:60}),
     cookie:{
-        maxAge:60
+       expires:600000
     }
  }))
 
 
-app.get('/',(req,res)=>{
-   if(req.session){
-return res.json({
-    session:req.session,
+app.get('/ruta-protegida',(req,res)=>{
+res.json(req.session.usuario || "Sin sesión de usuario")
 
 });
-} 
-});
 
-//destroy de la session
-
-app.get('/borrar',(req,res)=>{
-    req.session.destroy(err =>{
-        if (err) return res.json({mensaje:'error'})
-        else return res.json({mensaje:'Adios'})
-    })
+app.get("/crear-session",(req, res)=>{
+    req.session.usuario = "bluuweb";
+    res.redirect("/ruta-protegida");
 })
+
+app.get('/destruir-session',(req,res)=>{
+    req.session.destroy();
+    res.redirect('/ruta-protegida')
+})
+*/
 
 
 
@@ -126,80 +122,19 @@ app.use('/perfumeMarcJacobs',perfumeMarcJacobsRoutes);
 
 
 app.use('/users', usersRoutes);
+app.use('/',loginRoutes)
 app.use('/inicio',indexRoutes);
 app.use('/compra',compraRoutes);
 app.use('/contacto',contactoRoutes);
 app.use('/cuenta', cuentaRoutes);
 
 
+/*
+app.get('/',(req,res)=>{
+res.sendFile('index.html')
+})*/
 
 
-
-
-
-
-
-
-
- app.post('/users',(req,res)=>{
-    const {email, password} = req.body;
-    console.log(`Los datos recibidos son ${email} y ${password}`);
-
-    let cliente= clientes.find(cliente => cliente.email == email);
-    console.log(`cliente:${cliente}`);
-
-    try{
-        if(cliente){
-            let login = cliente.password == password && cliente.email == email;
-            console.log(`login:${login}`);
-            if(login){
-                const token = jwt.crearToken(email)
-                console.log(`el token generado es ${token}`);
-                res.header('auth-token',token).send({email });
-            }else{
-                return res.json({
-                     mensaje:"error en el login"
-                 })
-             }
-            }else{
-             return   res.json({
-                     mensaje:"usted no esta registrado"
-                })
-             }
-     }catch(error){
-        return res.json({
-             mensaje:"Hay un problema "
-         })
-    }
-
-});
-
-
-
-
-
-app.post('/cuenta',(req,res)=>{
-    const {email,password}= req.body
-    clientes.push({
-        email:email, password:password
-        });
- for (let i = 0 ; i < clientes.lengt; i++) {
-          console.log(clientes[i]);
-            
-
-        }
-        res.send('los datos han sido registrados');
-})
-
-app.get('/datos',jwt.auth,(req,res)=>{
-    res.json({
-        datos:"Tenemos tu token"
-    })
-})
-
-
-
-*/
 
 app.listen(PORT,(err)=>{
     if(err) {throw err}

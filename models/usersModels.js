@@ -32,10 +32,8 @@ password:{
 timestamp:{
     type:Date,
     default:Date.now()
-},
-accessToken: 
-{ type: String, 
-default: null }
+}
+
 
 
 });

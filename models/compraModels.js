@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {Schema} = require ('mongoose');
-const { nuevaCompra } = require('../controllers/compraControllers');
+const { nuevaCompra } = require('../models/compraModels');
 
 
 
